@@ -7,8 +7,12 @@ from openai import OpenAI
 # 1. Load environment variables from .env file
 load_dotenv()
 
-# 2. Initialize OpenAI Client (automatically reads OPENAI_API_KEY from .env)
-client = OpenAI()
+
+# Fetch API key from Streamlit Secrets or Environment Variable
+api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+
+# Initialize OpenAI Client
+client = OpenAI(api_key=api_key)
 
 st.set_page_config(
     page_title="Biomedical Waste Assistant",
